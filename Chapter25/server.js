@@ -1,39 +1,39 @@
 ﻿// 모듈을 추출합니다.
 var http = require('http');
+var url = require('url');
 var express = require('express');
+
+var apiData = {
+    url: 'http://apis.data.go.kr/6280000/busArrivalService',
+    serviceKey: 'dU7dvWQUG8tftP9%2FNQlBADY5gjT5ZpS6xWVIZ%2Fwxr26jXjuJZlrLgExQvtyIaCfiioEJWez5DJ%2FcdIWAAFrctQ%3D%3D',
+    numOfRows: 100,
+    pageNo: 1,
+    bstopId: 168001043
+}
 
 // 웹 서버를 생성합니다.
 var app = express();
 app.use(express.static('public'));
 
 // 웹 서버를 라우트합니다.
-app.get('/data.jsonp', function (request, response) {
-    // 요청 매개 변수를 추출합니다.
-    var callback = request.param('callback');
-
-    // 응답합니다.
-    response.send(callback + '(' + JSON.stringify({
-        제품명: '7D 건조 망고',
-        유형: '당절임',
-        성분: '망고, 설탕, 메타중아황산나트륨, 치자황색소',
-        원산지: '필리핀'
-    }) + ')');
-});
-
-// 웹 서버를 라우트합니다.
 app.get('/data.redirect', function (request, response) {
-    // 한빛미디어 RSS 페이지에 데이터 요청
-    http.get('http://www.hanb.co.kr/sync/rss_newbook.xml', function (web) {
-        // 데이터를 읽을 때마다
-        web.on('data', function (buffer) {
-            response.write(buffer);
-        });
+    var apiUrl = 'http://apis.data.go.kr/6280000/busArrivalService/getAllRouteBusArrivalList?bstopId='
+    + apiData.bstopId + '&serviceKey=' + apiData.serviceKey + '&numOfRows=100&pageNo=1';
+    if (apiUrl) {
+        http.get(apiUrl, function (web) {
+            // 데이터를 읽을 때마다
+            web.on('data', function (buffer) {
+                response.write(buffer);
+            });
 
-        // 데이터를 모두 읽으면
-        web.on('end', function () {
-            response.end();
+            // 데이터를 모두 읽으면
+            web.on('end', function () {
+                response.end();
+            });
         });
-    });
+    } else {
+        response.send('url 속성이 정의되지 않았습니다.');
+    }
 });
 
 // 웹 서버를 실행합니다.

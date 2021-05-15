@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <script src="underscore.js"></script>
     <script>
         // 학생 정보 배열을 만듭니다.
@@ -17,9 +18,7 @@
         students.push({ 이름: '박아현', 국어: 97, 수학: 92, 영어: 88, 과학: 95 });
         students.push({ 이름: '서준서', 국어: 45, 수학: 52, 영어: 72, 과학: 78 });
          // 과학 성적으로 정렬하고 출력합니다 - sortBy() 메서드
-        var sortByScience = _.sortBy(students, function (item) {
-            return item.과학
-        }).slice(0, 3);
+        var sortByScience = _.sortBy(students, (item) => item.과학).slice(0, 3);
         alert(JSON.stringify(sortByScience, null, 2));
         // 평균 성적으로 정렬하고 출력합니다 - sortBy() 메서드
         var sortByAverage = _.sortBy(students, function (item) {

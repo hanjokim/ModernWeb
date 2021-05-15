@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <script>
         // 학생 정보 배열을 만듭니다.
         var students = [];
@@ -17,14 +18,14 @@
         students.push({ 이름: '서준서', 국어: 45, 수학: 52, 영어: 72, 과학: 78 });
         // 과학 성적이 90점 넘는 학생을 필터링합니다.
         var filteredA = students.filter(function (item) {
-            return item > 90;
+            return item.과학 > 90;
         });
-        alert(filteredA);
+        alert(JSON.stringify(filteredA));
         // 평균이 90점 넘는 학생을 필터링합니다.
         var filteredB = students.filter(function (item) {
             return ((item.국어 + item.수학 + item.영어 + item.과학) / 4) > 90;
         });
-        alert(filteredB);
+        alert(JSON.stringify(filteredB));
     </script>
 </head>
 <body>

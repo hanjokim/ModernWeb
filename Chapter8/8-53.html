@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <script>
         // 변수를 선언합니다.
         var object = {
@@ -9,6 +10,9 @@
         };
         // 출력합니다.
         alert(JSON.stringify(object));
+        for (const i in object) {
+            alert(i + object[i]);
+        }
     </script>
 </head>
 <body>

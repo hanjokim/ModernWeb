@@ -1,6 +1,7 @@
 ﻿// 모듈을 추출합니다.
 var http = require('http');
 var express = require('express');
+var bodyParser = require('body-parser');
 
 // 변수를 선언합니다.
 var items = [{
@@ -17,8 +18,8 @@ var items = [{
 // 웹 서버를 생성합니다.
 var app = express();
 app.use(express.static('public'));
-app.use(express.bodyParser());
-app.use(app.router);
+app.use(bodyParser());
+// app.use(app.router);
 
 // 라우트합니다.
 app.all('/data.html', function (request, response) {
@@ -102,8 +103,8 @@ app.get('/products/:id', function (request, response) {
 
 app.post('/products', function (request, response) {
     // 변수를 선언합니다.
-    var name = request.param('name');
-    var price = request.param('price');
+    var name = request.params['name'];
+    var price = request.params['price'];
     var item = {
         name: name,
         price: price

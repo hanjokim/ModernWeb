@@ -6,6 +6,10 @@
         window.onload = function () {
             // 변수를 선언합니다.
             var clock = document.getElementById('clock');
+            clock.style.fontFamily = 'Serif';
+            setInterval(function () {
+                clock.innerHTML = new Date().toString();
+            }, 1000);
         };
     </script>
 </head>
